@@ -1,0 +1,110 @@
+"A date string with format `Y-m-d`, e.g. `2011-05-23`."
+scalar Date @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\Date")
+
+"A datetime string with format `Y-m-d H:i:s`, e.g. `2018-05-23 13:43:32`."
+scalar DateTime @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTime")
+
+"A datetime and timezone string in ISO 8601 format `Y-m-dTH:i:sO`, e.g. `2020-04-20T13:53:12+02:00`."
+scalar DateTimeTz @scalar(class: "Nuwave\\Lighthouse\\Schema\\Types\\Scalars\\DateTimeTz")
+
+type Query {
+    users: [User!]! @paginate(defaultCount: 10)
+    user(id: ID @eq): User @find
+
+    courses: [Course!]! @paginate(defaultCount: 10)
+    course(id: ID @eq): Course @find
+
+    statuses: [Status!]! @paginate(defaultCount: 10)
+    status(id: ID @eq): Status @find
+
+    types: [Type!]! @paginate(defaultCount: 10)
+    type(id: ID @eq): Type @find
+
+    tutors: [Tutor!]! @paginate(defaultCount: 10)
+    tutor(id: ID @eq): Tutor @find
+
+    ocupations: [Ocupation!]! @paginate(defaultCount: 10)
+    ocupation(id: ID @eq): Ocupation @find
+
+    studies: [Study!]! @paginate(defaultCount: 10)
+    study(id: ID @eq): Study @find
+
+    roles: [Role!]! @paginate(defaultCount: 10)
+    role(id: ID @eq): Role @find
+
+    permissions: [Permission!]! @paginate(defaultCount: 10)
+    permission(id: ID @eq): Permission @find
+}
+
+type User {
+    id: ID!
+    name: String!
+    last_name: String!
+    email: String!
+    phone_number: String!
+    city: String!
+    sex: String!
+    age: Int!
+    courses: [Course]!
+    ocupation: Ocupation!
+    study: Study!
+    role: [Role]!
+    image: String!
+    created_at: DateTime!
+    updated_at: DateTime!
+}
+
+type Role {
+    id: ID!
+    name: String!
+    display_name: String!
+    description: String!
+}
+
+type Ocupation {
+    id: ID!
+    ocupation_name: String!
+}
+
+type Study {
+    id: ID!
+    study_level: String!
+}
+
+type Course {
+    id: ID!
+    course_name: String!
+    start_date: String!
+    finish_date: String!
+    hours: Int!
+    description: String!
+    status: Status!
+    type: Type!
+    tutor: Tutor!
+    image: String!
+}
+
+type Status {
+    id: ID!
+    name: String!
+    description: String!
+}
+
+type Type {
+    id: ID!
+    name: String!
+    description: String!
+}
+
+type Tutor {
+    id: ID!
+    name: String!
+    academic_profile: String!
+}
+
+type Permission {
+    id: ID!
+    name: String!
+    display_name: String!
+    description: String!
+}
